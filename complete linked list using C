@@ -1,0 +1,595 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+int data;
+struct node* link;
+};
+
+
+           // function to count the no. of nodes .
+   
+int count_nodes(struct node* head)
+{    int count=0;
+    struct node* toCount=NULL;
+          toCount=head;
+             while(toCount!=NULL)
+             { toCount=toCount->link;
+                count++;
+                }
+                
+          return count;
+   }    
+   
+          // function to display all elements!
+   
+void print(struct node* head){
+if(head==NULL)
+{
+printf(" \n 👉 no nodes exist\n\v");
+}
+else 
+{
+    while(head!=NULL){
+     printf("element is : %d\n",head->data);
+     head=head->link;
+     }
+     printf("\v");
+  } 
+  return;
+}
+
+           //function to delete node at INDEX.
+           
+
+      struct node* delete_at_index(struct node* head , int index)
+   {
+      struct node* ptr=NULL,*ptr2=NULL,*ptr3=NULL;
+      ptr=head;
+      ptr2=head;
+      ptr3=head;
+      
+      if(head->link==NULL)
+      { free(head);
+         head=NULL;
+         }
+         
+         else if(head==NULL)
+         {
+            return head;
+            }
+        else
+        {
+        for(int j=1;j<=index;j++)
+        {  ptr3=ptr2;
+           ptr2=ptr;
+           ptr=ptr->link;
+           }
+           ptr3->link=ptr;
+          free(ptr2);
+          ptr2=NULL;
+          }
+           
+
+
+      return head;
+      }
+
+
+
+
+
+
+
+
+
+
+
+            //function to delete nodes in front .
+   
+   struct node* delete_start(struct node* head , int n )
+   {
+      struct node* ptr=NULL;
+      ptr=head; 
+      
+      if(ptr==NULL)
+      { printf("\n nodes not exist !\n");
+         exit(8);
+         }
+         
+     else{
+      
+      head=head->link;
+      free(ptr);
+      ptr=NULL;
+      }
+
+
+   return head;
+   }
+
+                 // function to delete a node in the end.
+    
+struct node* delete_end(struct node* head, int n)
+{
+     struct node* ptr=NULL,*ptr2=NULL,*ptr3=NULL,*ptr4,*ptr5=NULL;
+     ptr=head;
+     ptr2=head;
+     ptr4=head;
+     ptr5=head;
+     int count=0;
+     while(ptr5!=NULL)
+     {
+      ptr5=ptr5->link;
+      count++;
+       
+       }
+       
+       
+       if(ptr==NULL)
+       { 
+       return ptr;
+       }
+       else if(count==1)
+       { free(ptr4);
+          head=NULL;
+          }
+          
+          else {
+                  while(ptr!=NULL)
+                  { ptr3=ptr2;
+                    ptr2=ptr;
+                    ptr=ptr->link;
+                     }
+                     ptr3->link=NULL;
+                     free(ptr2);
+                     
+                     }
+          
+       
+     return head;
+       }
+  
+                // function to insert a node at INDEX !
+
+struct node* insert_at_index(struct node* ptr , int value)
+{ 
+int index,count=0;
+printf("\nenter the index no. where you want to insert new node:-\n");
+scanf("%d",&index);
+struct node head=NULL,*ptr2=NULL,*ptr3=NULL,*temp=(struct node)malloc(sizeof(struct node));
+temp->data=value;
+head=ptr;
+ptr2=ptr;
+ptr3=ptr;
+while(ptr2!=NULL)
+{ count++;
+   ptr2=ptr2->link;
+   }
+
+if(ptr==NULL)
+{
+printf(" no nodes exists\create or insert node first.\n\n");
+
+}
+else if(index>count)
+{
+printf("%d nodes are not available in the list \n\n",index);
+
+}
+else if(index==0||index<1)
+{
+printf(" nodes insertion failed || index is start from 1 !:\n\n");
+
+}
+else if(index==1)
+{
+temp->link=ptr;
+head=temp;
+}
+else{
+      for(int i=1;i<index;i++)
+      { ptr3=ptr;
+        ptr=ptr->link;
+      }
+      ptr3->link=temp;
+      temp->link=ptr;
+      }
+      
+      return head;
+       
+       
+  }     
+      
+      // function to insert a node in end!
+      
+struct node* insert_end(struct node* ptr , int value)
+{
+struct node head=NULL,*temp=(struct node)malloc(sizeof(struct node));
+head=ptr;
+if(ptr==NULL)
+{ 
+  temp->data=value;
+  temp->link=NULL;
+  head=temp;
+  }
+  else{
+        while(ptr->link!=NULL)
+        { ptr=ptr->link;
+        }
+        ptr->link=temp;
+        temp->data=value;
+        temp->link=NULL;
+       }
+       
+       return head;
+       }
+        
+        
+        
+     // function to insert a node in START!
+
+struct node* insert_front(struct node* ptr, int value)
+{ 
+struct node head=NULL,*temp=(struct node)malloc(sizeof(struct node));
+    head =ptr;
+    if(ptr==NULL)
+    { head=temp;
+      temp->data=value;
+      temp->link=NULL;
+      
+      }
+      
+      else{
+              temp->link=ptr;
+              temp->data=value;
+              head=temp;
+              
+              }
+              
+              
+      return head;
+      }
+
+
+
+
+int main(){
+int i,n,value,toDisplay,count=0;
+struct node*head=NULL,*forDelete=NULL,*one=NULL,*two=NULL,*three=NULL;
+/*
+one=(struct node*)malloc(sizeof(struct node));
+two=(struct node*)malloc(sizeof(struct node));
+three=(struct node*)malloc(sizeof(struct node));
+one->data=50;
+two->data=60;
+three->data=70;
+one->link=two;
+two->link=three;
+three->link=NULL;
+printf(" Here is the elements before insertion/deletion\n");
+*/
+//head = one;
+//print(head);
+printf("      hey! this is AKHAND        \n");
+printf("_\n\n");
+printf("WELCOME IN THE ERA OF NODE & LIST\n");
+printf("     let's start operation.    \n\n");  
+
+
+do{
+printf("_\n\n");
+printf("->press 1 for count the number of nodes in the list\n");
+printf("->press 2 for create nodes\n");
+printf("->press 3 for instert new node in the end\n");
+printf("->press 4 for instert new node in the front\n");
+printf("->press 5 for instert new node at the certain position (index) \n");
+printf("->press 6 for delete at end\n");
+printf("->press 7 for delete at start\n");
+printf("->press 8 for delete node at the certain position (index) \n");
+printf("->press 9 for display all elements\n");
+printf("->press 10 for exit\n\n");
+printf("_\n\n");
+
+printf(" Enter your choice option:");
+scanf("%d",&i);
+
+switch(i)
+{
+   case 1:   
+             count=count_nodes(head);
+             printf("\n %d nodes are available in the list .\n\n",count);
+             count = 0;
+             break ;
+
+   case 2:  
+             
+             
+             printf("\nenter the no. of nodes to create :");
+             scanf("%d",&n);
+             if(n==0||n<0)
+             {
+             printf(" \nnode creation failed\n\n");
+             }
+             else{
+             for(int j=0;j<n;j++)
+             {
+             printf("enter  element %d:-",j+1);
+             scanf("%d",&value);
+             head=insert_end(head , value);
+             }
+             printf("%d nodes and their element is successfully created:\n\n",n);
+             
+             int temporary=0;
+             
+             do
+             {
+             printf("---------------------------------\n");
+             printf("-->press 1 to DISPLAY :\n");
+             printf("-->press 2 to leave these operations :\n");
+             printf("-->press 3 to exit the program:\n");
+             printf("---------------------------------\n");
+             printf("Enter your choice :");
+             scanf("%d",&toDisplay);
+             switch(toDisplay)
+             {
+              case 1: printf("\nelements after the insertion:\n\n");
+                       print(head);
+                       temporary=0;
+                       break;
+              
+              case 2: temporary=0;
+                       printf("\n");
+                       break;
+                       
+              case 3: exit(2);
+                       temporary=0;
+                       break;
+                       
+              default : printf("\nplease enter a valid choice :\n\n");
+                         temporary=1;
+                         break;
+                        
+             }
+             } while(temporary==1);
+             }
+             break;
+             
+               
+    case 3:  
+             
+             
+             printf("\nenter the no. of nodes to create in end:");
+             scanf("%d",&n);
+             if(n==0||n<0)
+             {
+             printf(" \nnode insertion failed\n\n");
+             }
+             else{
+             for(int j=0;j<n;j++)
+             {
+             printf("enter new element %d :",j+1);
+             scanf("%d",&value);
+             head=insert_end(head , value);
+             }
+             printf("\n %d node and element is successfully inserted:\n\n",n);
+             
+             int temporary=0;
+             
+             do
+             {
+             printf("---------------------------------\n");
+             printf("-->press 1 to DISPLAY :\n");
+             printf("-->press 2 to leave these operations :\n");
+             printf("-->press 3 to exit the program:\n");
+             printf("---------------------------------\n");
+             printf("Enter your choice :");
+             scanf("%d",&toDisplay);
+             switch(toDisplay)
+             {
+              case 1: printf("\nelements after the insertion:\n\n");
+                       print(head);
+                       temporary=0;
+                       break;
+              
+              case 2: temporary=0;
+                       printf("\n");
+                       break;
+                       
+              case 3: exit(2);
+                       temporary=0;
+                       break;
+                       
+              default : printf("\nplease enter a valid choice :\n\n");
+                         temporary=1;
+                         break;
+                        
+             }
+             } while(temporary==1);
+             }
+             break;
+                         
+                         
+                         
+              
+             
+             
+             
+        case 4: 
+             
+             printf("\nEnter the no. of nodes to create in front:");
+             scanf("%d",&n);
+             if(n==0||n<0)
+             {
+             printf(" \nnode insertion failed.\n\n");
+             }
+             else{
+             for(int j=n;j>0;j--)
+             {
+             printf("enter new element %d\n :-",j); 
+             scanf("%d",&value);
+             head=insert_front(head , value);
+             }
+             printf("\nnode and element is successfully inserted:\n\n");
+             
+             int temporary=0;
+             do
+             {
+             printf("---------------------------------\n");
+             printf("-->press 1 to DISPLAY :\n");
+             printf("-->press 2 to ignore these operations :\n");
+             printf("-->press 3 to exit the program:\n");
+             printf("---------------------------------\n");
+             printf("Enter your choice :");
+             scanf("%d",&toDisplay);
+             
+             switch(toDisplay)
+             {
+              case 1: printf("\nelements after the insertion:\n\n");
+                       print(head);
+                       temporary=0;
+                       break;
+              
+              case 2: temporary=0;
+                       printf("\n");
+                       break;
+                       
+              case 3: exit(2);
+                       temporary=0;
+                       break;
+                       
+              default : printf("\nplease enter a valid choice :\n\n");
+                         temporary=1;
+                         break;
+                        
+             }
+             } while(temporary==1);
+             }
+             break;
+             
+             
+    
+    
+    
+    case 5: printf("\nEnter the value to insert :");
+             scanf("%d",&n);
+           head=insert_at_index(head,n);
+           printf("AND\n");
+           printf("elements after the insertion:\n\n");
+                       print(head);
+             
+               break;
+               
+    case 6: 
+           
+           printf("\nenter the no. of nodes to delete from end:");
+             scanf("%d",&n);
+             
+             forDelete=head;
+             while(forDelete!=NULL)
+             { forDelete=forDelete->link;
+                count++;
+                }
+                
+                if(n<1)
+             printf("\n0 & -ive no. of nodes not exist\n\n");
+             else if(count<n)
+             printf("\nthere are only %d elements in list\n so nodes deletion failed\n\n", count);
+             else 
+             {
+             for(int j=0;j<n;j++)
+             {
+             head=delete_end(head,n);
+             if(head==NULL)
+             {
+             printf("\nelement/node is successfully deleted AND now \n");
+             printf("list has no elements/nodes.\n\n");
+             break;
+             }
+             }
+             printf("elements after deletion\n\n");
+             print(head);
+             
+             }
+             count=0;
+            break;
+            
+            
+            
+     case 7: printf("\nenter the no. of nodes to delete from start:");
+             scanf("%d",&n);
+             forDelete=head;
+             while(forDelete!=NULL)
+             { forDelete=forDelete->link;
+                count++;
+                }
+                
+                if(n<1)
+             printf("\n0 & -ive no. of nodes not exist\n\n");
+             else if(count<n)
+             printf("\nthere are only %d elements in list\n so nodes deletion failed\n\n", count);
+             else 
+             {
+             for(int j=0;j<n;j++)
+             {
+             head=delete_start(head,n);
+             if(head==NULL)
+             {
+             printf("\nelement/node is successfully deleted AND now \n");
+             printf("list has no elements/nodes.\n\n");
+             break;
+             }
+             }
+             printf("elements after deletion\n\n");
+             print(head);
+             
+             }
+             count=0;
+            break;
+               
+               
+               
+     case 8:   
+     
+              count=count_nodes(head);
+             printf("\nEnter the index no. to delete node : ");
+             scanf("%d",&n);
+             if(n<=0)
+             {
+               printf("\n0 & -ive no. of nodes not exist.\n\n");
+               }
+               
+               else if(n>count)
+               {
+               printf("\nthere is only %d nodes present in the list \n\n",count);
+               }
+               
+          else{
+               
+           head=delete_at_index(head,n);
+              printf("deletion completed\n");
+              printf("        &         \n ");
+           printf("elements after the deletion:\n\n");
+                       print(head);
+                       }
+             
+             count=0;
+             
+               break;       
+               
+             
+     case 9: print(head);
+              break;  
+              
+     case 10:  exit(1);
+              break;     
+             
+    
+    default: printf("invalid input\n\n");
+             break;
+  }
+  }
+  while(1);
+    
+                  return 0;
+}
